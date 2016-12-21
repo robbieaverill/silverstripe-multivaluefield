@@ -11,7 +11,7 @@
         }
     ],
     "require": {
-        "silverstripe/framework": "^4.0"
+        "silverstripe/framework": "^4.0@dev"
     },
     "extra": {
         "branch-alias": {
@@ -20,7 +20,8 @@
     },
     "autoload": {
         "psr-4": {
-            "SilverStripe\\MultiValueField\\": "src/"
+            "SilverStripe\\MultiValueField\\": "src/",
+            "SilverStripe\\MultiValueField\\Tests\\": "tests/"
         }
     }
 }

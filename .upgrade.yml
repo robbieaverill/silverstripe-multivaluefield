@@ -1,0 +1,7 @@
+mappings:
+  KeyValueField: SilverStripe\MultiValueField\Forms\KeyValueField
+  MultiValueCheckboxField: SilverStripe\MultiValueField\Forms\MultiValueCheckboxField
+  MultiValueDropdownField: SilverStripe\MultiValueField\Forms\MultiValueDropdownField
+  MultiValueField: SilverStripe\MultiValueField\Forms\MultiValueField
+  MultiValueListField: SilverStripe\MultiValueField\Forms\MultiValueListField
+  MultiValueTextField: SilverStripe\MultiValueField\Forms\MultiValueTextField

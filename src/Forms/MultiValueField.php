@@ -1,12 +1,21 @@
 <?php
 
+namespace SilverStripe\MultiValueField\Forms;
+
+use SilverStripe\Core\Convert;
+use SilverStripe\ORM\ArrayList;
+use SilverStripe\ORM\DB;
+use SilverStripe\ORM\FieldType\FormField;
+use SilverStripe\ORM\FieldType\DBVarchar;
+use SilverStripe\View\ArrayData;
+
 /**
  * A DB field that serialises an array before writing it to the db, and returning the array
  * back to the end user.
  *
  * @author Marcus Nyeholt <marcus@silverstripe.com.au>
  */
-class MultiValueField extends DBField implements CompositeDBField {
+class MultiValueField extends FormField {
 	protected $changed = false;
 
 	/**
@@ -150,7 +159,7 @@ class MultiValueField extends DBField implements CompositeDBField {
 	public function Implode($separator = ', ') {
 		return implode($separator, $this->getValue());
 	}
-    
+
     public function __toString() {
         if ($this->getValue()) {
             return $this->csv();
@@ -166,7 +175,7 @@ class MultiValueField extends DBField implements CompositeDBField {
 		$items = array();
 		if ($this->value) {
 			foreach ($this->value as $key => $item) {
-				$v = new Varchar('Value');
+				$v = new DBVarchar('Value');
 				$v->setValue($item);
 
 				$obj = new ArrayData(array(

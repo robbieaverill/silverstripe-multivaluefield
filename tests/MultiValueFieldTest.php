@@ -1,4 +1,13 @@
 <?php
+
+namespace SilverStripe\MultiValueField\Test;
+
+use SilverStripe\MultiValueField\Forms\MultiValueField;
+use SilverStripe\Dev\SapphireTest;
+use SilverStripe\Dev\TestOnly;
+use SilverStripe\ORM\DataObject;
+use SilverStripe\ORM\FieldType\DBField;
+
 /**
  * @author Marcus Nyeholt <marcus@silverstripe.com.au>
  */
@@ -39,7 +48,7 @@ class MultiValueFieldTest extends SapphireTest {
 		$field->setValue(array(1, 2, 3), null, false);
 		$this->assertFalse($field->isChanged());
 
-		$field = DBField::create_field('MultiValueField', array(1, 2, 3));
+		$field = DBField::create_field('SilverStripe\\MultiValueField\\Forms\\MultiValueField', array(1, 2, 3));
 		$field->setValue(null);
 		$this->assertTrue($field->isChanged());
 	}

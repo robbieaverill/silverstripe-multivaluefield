@@ -1,5 +1,11 @@
 <?php
 
+namespace SilverStripe\MultiValueField\Forms;
+
+use SilverStripe\Core\Convert;
+use SilverStripe\Forms\FormField;
+use SilverStripe\View\Requirements;
+
 /**
  * A text field for multivalued text entry
  *
@@ -12,7 +18,7 @@ class MultiValueTextField extends FormField {
 	protected $tag = 'input';
 
 	public function Field($properties = array()) {
-		Requirements::javascript(THIRDPARTY_DIR . '/jquery/jquery.js');
+		Requirements::javascript(ADMIN_THIRDPARTY_DIR . '/jquery/jquery.js');
 		Requirements::javascript('multivaluefield/javascript/multivaluefield.js');
 		Requirements::css('multivaluefield/css/multivaluefield.css');
 

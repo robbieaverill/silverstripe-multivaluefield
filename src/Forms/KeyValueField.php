@@ -1,5 +1,10 @@
 <?php
 
+namespace SilverStripe\MultiValueField\Forms;
+
+use SilverStripe\Core\Convert;
+use SilverStripe\View\Requirements;
+
 /**
  * A field that lets you specify both a key AND a value for each row entry
  *
@@ -16,7 +21,7 @@ class KeyValueField extends MultiValueTextField {
 	}
 
 	public function Field($properties = array()) {
-		Requirements::javascript(THIRDPARTY_DIR . '/jquery/jquery.js');
+		Requirements::javascript(ADMIN_THIRDPARTY_DIR . '/jquery/jquery.js');
 		Requirements::javascript('multivaluefield/javascript/multivaluefield.js');
 		Requirements::css('multivaluefield/css/multivaluefield.css');
 
@@ -52,7 +57,7 @@ class KeyValueField extends MultiValueTextField {
 			$keyField = $this->createSelectList('new', $nameKey, $this->sourceKeys);
 			$valField = $this->createSelectList('new', $nameVal, $this->sourceValues);
 			$fields[] = $keyField . ' ' . $valField;
-//			$fields[] = $this->createSelectList('new', $name, $this->source);
+			// $fields[] = $this->createSelectList('new', $name, $this->source);
 		}
 
 		return '<ul id="'.$this->id().'" class="multivaluefieldlist mvkeyvallist '.$this->extraClass().'"><li>'.implode('</li><li>', $fields).'</li></ul>';

@@ -1,5 +1,13 @@
 <?php
 
+namespace SilverStripe\MultiValueField\Forms;
+
+use SilverStripe\Forms\ReadonlyField;
+use SilverStripe\Forms\FormField;
+use SilverStripe\Forms\CheckboxSetField;
+use SilverStripe\ORM\DataObjectInterface;
+use SilverStripe\View\Requirements;
+
 /**
  * A checkboxset that uses a multivalue field for key / val pairs
  *
@@ -28,7 +36,10 @@ class MultiValueCheckboxField extends CheckboxSetField {
 	 * @todo Should use CheckboxField FieldHolder rather than constructing own markup.
 	 */
 	public function Field($properties = array()) {
-		Requirements::css(SAPPHIRE_DIR . '/css/CheckboxSetField.css');
+        /**
+         * @todo This CSS file is gone in 4.x. Is it still required? What to do. Will revisit.
+         */
+		// Requirements::css(SAPPHIRE_DIR . '/css/CheckboxSetField.css');
 
 		$source = $this->source;
 		$values = $this->value;
@@ -60,7 +71,7 @@ class MultiValueCheckboxField extends CheckboxSetField {
 				// Source and values are DataObject sets.
 				if($values && is_a($values, 'DataObjectSet')) {
 					foreach($values as $object) {
-						if(is_a($object, 'DataObject')) {
+						if(is_a($object, 'SilverStripe\\ORM\\DataObject')) {
 							$items[] = $object->ID;
 						}
 				   }
@@ -94,7 +105,7 @@ class MultiValueCheckboxField extends CheckboxSetField {
 		}
 
 		if($source) foreach($source as $index => $item) {
-			if(is_a($item, 'DataObject')) {
+			if(is_a($item, 'SilverStripe\\ORM\\DataObject')) {
 				$key = $item->ID;
 				$value = $item->Title;
 			} else {
@@ -156,11 +167,11 @@ class MultiValueCheckboxField extends CheckboxSetField {
 	 */
 	public function setValue($value, $obj = null) {
 		// If we're not passed a value directly, we can look for it in a relation method on the object passed as a second arg
-//		if(!$value && $obj && $obj instanceof DataObject && $obj->hasMethod($this->name)) {
-//			$funcName = $this->name;
-//			$selected = $obj->$funcName();
-//			$value = $selected->toDropdownMap('ID', 'ID');
-//		}
+		// if(!$value && $obj && $obj instanceof DataObject && $obj->hasMethod($this->name)) {
+		// 	$funcName = $this->name;
+		// 	$selected = $obj->$funcName();
+		// 	$value = $selected->toDropdownMap('ID', 'ID');
+		// }
 
 		parent::setValue($value, $obj);
 	}
@@ -192,8 +203,8 @@ class MultiValueCheckboxField extends CheckboxSetField {
 
 				$record->$fieldname = $this->value;
 
-//				$this->value = str_replace(',', '{comma}', $this->value);
-//				$record->$fieldname = $this->value;
+				// $this->value = str_replace(',', '{comma}', $this->value);
+				// $record->$fieldname = $this->value;
 			} else {
 				$record->$fieldname = array();
 			}
